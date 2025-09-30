@@ -1,7 +1,7 @@
 pipeline {
     agent any
    environment {
-        PATH = "/usr/local/bin:$PATH"
+        PATH = "C:\Program Files\Docker\Docker\resources\bin:$PATH"
     }
     tools {
         maven 'Maven3'    // Nombre EXACTO configurado en Jenkins -> Global Tool Configuration
@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Checkout') {
      steps {
-                git branch: 'main', url: 'https://github.com/rickygr1982/proyecto1.git', credentialsId: 'github-credentials'
+                git branch: 'main', url: 'https://github.com/ivancher2025/eureka.git', credentialsId: 'github-credentials'
             }
         }
 
@@ -23,14 +23,14 @@ pipeline {
 
         stage('Docker Build') {
             steps {
-                sh 'docker build -t servicio1 .'
+                sh 'docker build -t euraka .'
             }
         }
 
         stage('Docker Run') {
             steps {
-                sh 'docker stop servicio1 || true && docker rm servicio1 || true'
-                sh 'docker run -d -p 8081:8081 --name servicio1 servicio1'
+                sh 'docker stop euraka || true && docker rm euraka || true'
+                sh 'docker run -d -p 8081:8081 --name servicio1 euraka'
             }
         }
     }
