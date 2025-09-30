@@ -34,8 +34,14 @@ pipeline {
                 bat '''
                     docker stop euraka || exit 0
                     docker rm euraka || exit 0
-                    docker run -d -p 8081:8081 --name euraka euraka
+                    docker run -d -p 8761:8761 --name euraka euraka
                 '''
+            }
+        }
+
+       stage('Cleanup') {
+            steps {
+                bat 'docker image prune -f'
             }
         }
     }
